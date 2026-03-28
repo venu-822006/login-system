@@ -1,0 +1,7 @@
+flask
+authlib
+flask-bcrypt
+pymongo
+python-dotenv
+pyjwt
+requests

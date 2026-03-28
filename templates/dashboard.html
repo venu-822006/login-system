@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Dashboard</h1>
+<p id="user"></p>
+
+<button onclick="logout()">Logout</button>
+
+<script>
+const token = localStorage.getItem("token");
+
+if (!token){
+  window.location.href="/";
+}
+
+const payload = JSON.parse(atob(token.split('.')[1]));
+document.getElementById("user").innerText = payload.email;
+
+function logout(){
+ localStorage.removeItem("token");
+ window.location.href="/";
+}
+</script>
+
+</body>
+</html>

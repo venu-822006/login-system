@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Advanced Login</title>
+<style>
+body {
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  display:flex;justify-content:center;align-items:center;height:100vh;
+  font-family:Arial;
+}
+.container {
+  background:rgba(255,255,255,0.1);
+  padding:30px;border-radius:15px;color:white;
+}
+input,button {
+  width:100%;padding:10px;margin:10px 0;
+}
+button {background:#4facfe;color:white;border:none;}
+.google{background:#db4437;}
+.github{background:black;}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Login</h2>
+
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+<button onclick="register()">Register</button>
+
+<h3>OR</h3>
+
+<a href="/login/google"><button class="google">Google</button></a>
+<a href="/login/github"><button class="github">GitHub</button></a>
+</div>
+
+<script>
+function login(){
+ fetch('/login',{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({
+    email:email.value,
+    password:password.value
+  })
+ }).then(r=>r.json()).then(d=>{
+   if(d.token){
+     localStorage.setItem("token",d.token);
+     window.location.href="/dashboard";
+   } else alert(d.message);
+ });
+}
+
+function register(){
+ fetch('/register',{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({
+    email:email.value,
+    password:password.value
+  })
+ }).then(r=>r.json()).then(d=>alert(d.message));
+}
+</script>
+
+</body>
+</html>
