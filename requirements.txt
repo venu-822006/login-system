@@ -1,7 +1,8 @@
 flask
-authlib
-flask-bcrypt
 pymongo
 python-dotenv
-pyjwt
+PyJWT
+flask-bcrypt
+authlib
 requests
+gunicorn
